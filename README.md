@@ -1,5 +1,5 @@
 # Automatic Extraction natural 2D shapes from images 
-This code is part of the Large shape and textures (LAS&T).
+
 ## Extracting shapes from images: ExtractShape.py
 
 ExtractShape.py run over folder of images and extract 2D shapes, should run out of the box with the supplied sampled folders.
