@@ -21,7 +21,8 @@ This code can run on simple cpu it need set of textures saved as a rgb images, a
 
 Shapes can be extracted from images using the above scripts or downloaded from [this url.]([https://icedrive.net/s/gTbNa4BaCRGAijRBvW4AVihZ8y8h])  
 
-Textures can be downloaded from the vastexture datasets (Mirror1)[https://sites.google.com/view/infinitexture/home],  (Mirror2)[https://zenodo.org/records/12629301].
+
+Textures can be downloaded from the vastexture datasets [Mirror1](https://sites.google.com/view/infinitexture/home),  [Mirror2](https://zenodo.org/records/12629301).
 
 
 
@@ -36,4 +37,4 @@ This code can run on simple cpu it need set of textures saved as a rgb images, a
 
 Shapes can be extracted from images using the above scripts or downloaded from [this url.](https://drive.google.com/file/d/1Mb6aYvcwqRGdydCY7AFdvs1zwR8JpOwQ/view?usp=drive_link)  
 
-Textures can be downloaded from the vastexture datasets (Mirror1)[https://sites.google.com/view/infinitexture/home],  (Mirror2)[https://zenodo.org/records/12629301].
+Textures can be downloaded from the vastexture datasets [Mirror1](https://sites.google.com/view/infinitexture/home),  [Mirror2](https://zenodo.org/records/12629301).
