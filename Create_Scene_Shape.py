@@ -146,29 +146,49 @@ def deploy_texture(sp,tx1,tx2,img_sz,rotate_shape=True,keep_shape_size=True,rota
 if __name__=="__main__":
     #----------------Input parameters------------------------------------------------------------------------------------------------
     shape_dir= "shapes/" #input folder of shapes saved as binary masks (see supplied shapes folder)
-        #r"/media/deadcrow/6TB/Data_zoo/shapes//"
     texture_dir=r"textures" # input Folder of textures  saved  (see supplied shapes folder)
     out_main_dir=r"Shape_Matching_test/" # output folder of images of the same shape with different variations (orientation/texture/color/background)
+    #***********************************
+    # shape_dir = r"/home/deadcrow/Downloads/SHAPES_2D_350k_UNIFIED/"  # input folder of shapes saved as binary masks (see supplied shapes folder)
+    # texture_dir = r"/media/deadcrow/SSD_480GB/Extracted_textures_larger_512_pix_55k_Set2/textures_larger_512_pix_50k//"  # input Folder of textures  saved  (see supplied shapes folder)
+    # out_main_dir = r"/media/deadcrow/SSD_480GB/segment_anything/2D_Shape_Matching_Tests/2D_Shapes_Recognition_Textured_Synthetic//"  # output folder of images of the same shape with different variations (orientation/texture/color/background)
+
+    #***************************************
+
+
     num_inst=5 #  number of images to render with each shape
     img_sz=512 # Size of generated image
-
+    resize_range = [int(img_sz*0.32), img_sz] # Size range for the shape (if you use resize
     #  Which element of the shape will be modified between different images:
-    rotate_shape=True
-    keep_shape_size=True
-    rotate_texture=True
-    uniform_shape_texture=True
-    uniform_background=True
-    black_and_white=False
+    rotate_shape=True # randomly rotate shape
+    keep_shape_size=True # if this is false the shape will be resize to max size feet the image
+    rotate_texture=True # randomly rotate exture
+    uniform_shape_texture=False  # if False the background will be cover with a  random texture
+    uniform_background=False # if False the background will be cover with a  random texture
+    black_and_white=False # shape will be white background will be black else each will have random color only work if  uniform_background and or uniform_shape_texture
+    resize_shape=True # randomly resize shape in sizes in resize_range
+    if resize_shape: keep_shape_size=True
+
+
     #-------------------Main script---------------------------------------------------------
     if not os.path.exists(out_main_dir):
          os.mkdir(out_main_dir)
     all_texutres= os.listdir(texture_dir)
 
     for spfile in os.listdir(shape_dir):
-          sp = cv2.imread(shape_dir+"/"+spfile) # load shape
+          sp_origin = cv2.imread(shape_dir+"/"+spfile) # load shape
+
+
           out_dir = out_main_dir+"//"+spfile[:-4] +"//"
           if not os.path.exists(out_dir): os.mkdir(out_dir)
           for i in range(num_inst):
+              sp=sp_origin.copy()
+              if resize_shape:  # random resize
+                  mx = np.max(sp.shape)
+                  szrange = resize_range / np.max(sp.shape)
+                  rs = np.random.rand() * (szrange[1] - szrange[0]) + szrange[0]
+                  sp = cv2.resize(sp, (int(rs * sp.shape[1]), int(rs * sp.shape[0])), cv2.INTER_NEAREST)
+
               indx1=np.random.randint(0,len(all_texutres))
               while(True):
                   indx2 = np.random.randint(0, len(all_texutres)) # load shape texture
